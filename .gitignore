@@ -1,0 +1,32 @@
+# Data files — never commit
+data/
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# CatBoost
+catboost_info/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environments
+.env

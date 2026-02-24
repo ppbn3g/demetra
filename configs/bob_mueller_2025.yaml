@@ -1,0 +1,17 @@
+farm_name: Bob
+field_name: Mueller
+season: 2025
+crop: corn
+
+harvest_shapefile: data/raw/bob_mueller_2025/harvest/Blackburn_Bob_Mueller_Harvest_2025-09-03_00.shp
+
+nitrogen_shapefiles:
+  - data/raw/bob_mueller_2025/nitrogen/Blackburn_Bob_Mueller_Application_2024-11-25_00.shp
+  - data/raw/bob_mueller_2025/nitrogen/Blackburn_Bob_Mueller_Application_2024-12-10_00.shp
+
+growing_season_start: "2025-04-15"
+growing_season_end: "2025-10-01"
+
+cell_size_meters: 63.6
+units: meters
+output_dir: data/processed/bob_mueller_2025
