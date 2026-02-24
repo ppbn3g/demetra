@@ -7,21 +7,21 @@ import logging
 import geopandas as gpd
 import pandas as pd
 
-from agrifield.config.settings import AgrifieldSettings
-from agrifield.geo.transforms import transform_points
+from demetra.config.settings import demetraSettings
+from demetra.geo.transforms import transform_points
 
 logger = logging.getLogger(__name__)
 
 
 def clean_jd_yield_dataframe(
     df_raw: pd.DataFrame,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame:
     """Apply cleaning rules to a raw John Deere yield DataFrame.
 
     Filters are driven by *settings* thresholds so nothing is hardcoded.
     """
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
     df = df_raw.copy()
 
     # Valid yield range
@@ -50,10 +50,10 @@ def load_yield_points(
     shp_path: str,
     farm_name: str,
     field_name: str,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame:
     """Load a yield shapefile and return cleaned points with UTM coordinates."""
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
 
     gdf = gpd.read_file(shp_path)
     logger.info("JD shapefile columns: %s", list(gdf.columns))

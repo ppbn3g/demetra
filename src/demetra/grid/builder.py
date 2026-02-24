@@ -7,8 +7,8 @@ import logging
 import numpy as np
 import pandas as pd
 
-from agrifield.config.settings import AgrifieldSettings
-from agrifield.ingest.yield_loader import load_yield_points
+from demetra.config.settings import demetraSettings
+from demetra.ingest.yield_loader import load_yield_points
 
 logger = logging.getLogger(__name__)
 
@@ -99,10 +99,10 @@ def build_field_grid(
     field: str,
     cell_size: float,
     units: str,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame:
     """End-to-end: load yield shapefile → build grid → assign points."""
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
 
     yield_df = load_yield_points(shp_path, farm, field, settings)
     grid_df = build_acre_grid(yield_df, cell_size, units)

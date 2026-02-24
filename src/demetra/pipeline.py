@@ -7,28 +7,28 @@ from pathlib import Path
 
 import pandas as pd
 
-from agrifield.config.field_config import FieldConfig
-from agrifield.config.settings import AgrifieldSettings
-from agrifield.external.soil import add_soil_to_grid
-from agrifield.external.weather import add_rainfall_to_grid
-from agrifield.geo.transforms import add_latlon_to_grid
-from agrifield.grid.builder import build_field_grid
-from agrifield.grid.operations import filter_phantom_acres, merge_nitrogen_into_grid
-from agrifield.ingest.nitrogen_loader import combine_multiple_n_files
+from demetra.config.field_config import FieldConfig
+from demetra.config.settings import demetraSettings
+from demetra.external.soil import add_soil_to_grid
+from demetra.external.weather import add_rainfall_to_grid
+from demetra.geo.transforms import add_latlon_to_grid
+from demetra.grid.builder import build_field_grid
+from demetra.grid.operations import filter_phantom_acres, merge_nitrogen_into_grid
+from demetra.ingest.nitrogen_loader import combine_multiple_n_files
 
 logger = logging.getLogger(__name__)
 
 
 def build_field_dataset(
     config: FieldConfig,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame:
     """Run the full data-preparation pipeline for one field.
 
     Steps: load yield → build grid → filter → add rainfall → add lat/lon
     → add soil → merge nitrogen → save CSV.
     """
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
 
     # 1. Build acre grid from yield shapefile
     logger.info("Building acre grid from %s", config.harvest_shapefile)

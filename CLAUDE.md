@@ -1,4 +1,4 @@
-# AgriField — Project Instructions for Claude Code
+# Demetra — Project Instructions for Claude Code
 
 ## Project Overview
 Agricultural field data analytics package. Predicts crop yield at acre-level resolution
@@ -6,7 +6,7 @@ using machine learning, integrating John Deere yield monitor data, nitrogen appl
 records, Open-Meteo weather data, and USDA SSURGO soil data.
 
 ## Architecture
-- `src/agrifield/` — pip-installable package (src layout)
+- `src/demetra/` — pip-installable package (src layout)
 - `configs/` — per-field YAML configs (one per farm/field/season)
 - `data/` — git-ignored, raw shapefiles + processed CSVs
 - `tests/` — pytest test suite
@@ -49,8 +49,8 @@ records, Open-Meteo weather data, and USDA SSURGO soil data.
 - Coordinate transforms use batch `transformer.transform(xs, ys)`, not one-at-a-time loops.
 
 ### Settings injection
-- Functions that use configurable values accept `settings: AgrifieldSettings | None = None`.
-- Default to `AgrifieldSettings()` when None is passed.
+- Functions that use configurable values accept `settings: demetraSettings | None = None`.
+- Default to `demetraSettings()` when None is passed.
 - NEVER hardcode API URLs, thresholds, or CRS codes inside functions.
 
 ### Plot functions
@@ -59,7 +59,7 @@ records, Open-Meteo weather data, and USDA SSURGO soil data.
 - The caller (CLI or notebook) decides to show or save.
 
 ### Imports
-- Use absolute imports: `from agrifield.geo.transforms import transform_points`
+- Use absolute imports: `from demetra.geo.transforms import transform_points`
 - Group: stdlib → third-party → local, separated by blank lines.
 
 ### Naming
@@ -89,5 +89,5 @@ records, Open-Meteo weather data, and USDA SSURGO soil data.
 - CatBoost is optional — code MUST handle its absence gracefully.
 
 ## CLI
-- Entry point: `agrifield` (defined in pyproject.toml).
+- Entry point: `demetra` (defined in pyproject.toml).
 - Commands: `prepare`, `model`, `inspect`, `plot`.

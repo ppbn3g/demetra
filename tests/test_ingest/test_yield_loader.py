@@ -5,18 +5,18 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from agrifield.config.settings import AgrifieldSettings
-from agrifield.ingest.yield_loader import clean_jd_yield_dataframe
+from demetra.config.settings import demetraSettings
+from demetra.ingest.yield_loader import clean_jd_yield_dataframe
 
 
-def test_clean_removes_low_yield(settings: AgrifieldSettings) -> None:
+def test_clean_removes_low_yield(settings: demetraSettings) -> None:
     df = pd.DataFrame({"yield_bu_ac": [10, 49, 50, 200, 350, 400]})
     result = clean_jd_yield_dataframe(df, settings)
     assert result["yield_bu_ac"].min() >= settings.yield_min
     assert result["yield_bu_ac"].max() <= settings.yield_max
 
 
-def test_clean_removes_slow_speed(settings: AgrifieldSettings) -> None:
+def test_clean_removes_slow_speed(settings: demetraSettings) -> None:
     df = pd.DataFrame({
         "yield_bu_ac": [200, 200, 200],
         "VEHICLSPEED": [0.0, 0.1, 0.5],

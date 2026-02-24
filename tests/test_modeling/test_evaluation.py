@@ -5,11 +5,11 @@ from __future__ import annotations
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-from agrifield.modeling.evaluation import fit_and_evaluate
+from demetra.modeling.evaluation import fit_and_evaluate
 
 
 def test_metrics_keys(sample_acre_df: pd.DataFrame) -> None:
-    from agrifield.modeling.features import build_feature_matrix
+    from demetra.modeling.features import build_feature_matrix
 
     X, y = build_feature_matrix(sample_acre_df, use_coords=True)
     model = LinearRegression()
@@ -21,7 +21,7 @@ def test_metrics_keys(sample_acre_df: pd.DataFrame) -> None:
 
 
 def test_rmse_is_positive(sample_acre_df: pd.DataFrame) -> None:
-    from agrifield.modeling.features import build_feature_matrix
+    from demetra.modeling.features import build_feature_matrix
 
     X, y = build_feature_matrix(sample_acre_df, use_coords=True)
     model = LinearRegression()

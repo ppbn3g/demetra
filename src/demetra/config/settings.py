@@ -1,14 +1,14 @@
-"""Global settings for AgriField, overridable via AGRIFIELD_* env vars."""
+"""Global settings for Demetra, overridable via DEMETRA_* env vars."""
 
 from __future__ import annotations
 
 from pydantic_settings import BaseSettings
 
 
-class AgrifieldSettings(BaseSettings):
-    """Centralized configuration for the agrifield package."""
+class demetraSettings(BaseSettings):
+    """Centralized configuration for the demetra package."""
 
-    model_config = {"env_prefix": "AGRIFIELD_"}
+    model_config = {"env_prefix": "DEMETRA_"}
 
     # --- CRS codes ---
     source_crs: str = "EPSG:4326"

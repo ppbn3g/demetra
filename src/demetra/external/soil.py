@@ -8,8 +8,8 @@ import time
 import pandas as pd
 from tqdm import tqdm
 
-from agrifield.config.settings import AgrifieldSettings
-from agrifield.external.weather import _request_with_retry
+from demetra.config.settings import demetraSettings
+from demetra.external.weather import _request_with_retry
 
 logger = logging.getLogger(__name__)
 
@@ -17,10 +17,10 @@ logger = logging.getLogger(__name__)
 def query_ssurgo(
     lat: float,
     lon: float,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> tuple[str | None, str | None]:
     """Query SSURGO for the soil map unit at a single (lat, lon) point."""
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
 
     wkt_point = f"point ({lon} {lat})"
     sql = (
@@ -71,10 +71,10 @@ def query_ssurgo(
 
 def add_soil_to_grid(
     grid_df: pd.DataFrame,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame:
     """Add ``soil_musym`` and ``soil_muname`` columns by querying SSURGO per acre."""
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
     df = grid_df.copy()
 
     musyms: list[str | None] = []

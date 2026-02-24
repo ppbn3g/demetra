@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "agrifield"
+name = "demetra"
 version = "0.1.0"
 description = "Agricultural field data analytics — acre-level crop yield prediction"
 readme = "README.md"
@@ -36,15 +36,15 @@ dev = [
     "pytest-cov>=4.0",
 ]
 all = [
-    "agrifield[catboost]",
-    "agrifield[dev]",
+    "demetra[catboost]",
+    "demetra[dev]",
 ]
 
 [project.scripts]
-agrifield = "agrifield.cli:main"
+demetra = "demetra.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/agrifield"]
+packages = ["src/demetra"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

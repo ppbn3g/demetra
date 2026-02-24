@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 from pyproj import Transformer
 
-from agrifield.config.settings import AgrifieldSettings
+from demetra.config.settings import demetraSettings
 
 logger = logging.getLogger(__name__)
 
@@ -48,10 +48,10 @@ def transform_points(
 
 def get_field_centroid_latlon(
     shp_path: str,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> tuple[float, float]:
     """Return (lat, lon) of the centroid of all geometries in *shp_path*."""
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
     gdf = gpd.read_file(shp_path)
     if gdf.crs is None:
         gdf = gdf.set_crs(settings.source_crs)
@@ -63,10 +63,10 @@ def get_field_centroid_latlon(
 
 def add_latlon_to_grid(
     grid_df: pd.DataFrame,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame:
     """Add ``lat`` and ``lon`` columns to *grid_df* from UTM cell centres."""
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
     df = grid_df.copy()
     cx = ((df["x_min"] + df["x_max"]) / 2.0).values
     cy = ((df["y_min"] + df["y_max"]) / 2.0).values

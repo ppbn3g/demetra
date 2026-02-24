@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from agrifield.grid.builder import build_acre_grid, assign_points_to_grid
+from demetra.grid.builder import build_acre_grid, assign_points_to_grid
 
 
 def test_grid_dimensions(sample_yield_df: pd.DataFrame) -> None:

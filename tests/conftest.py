@@ -6,13 +6,13 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from agrifield.config.settings import AgrifieldSettings
+from demetra.config.settings import demetraSettings
 
 
 @pytest.fixture()
-def settings() -> AgrifieldSettings:
+def settings() -> demetraSettings:
     """Default settings instance for tests."""
-    return AgrifieldSettings()
+    return demetraSettings()
 
 
 @pytest.fixture()

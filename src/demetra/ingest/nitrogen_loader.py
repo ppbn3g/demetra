@@ -7,8 +7,8 @@ import logging
 import geopandas as gpd
 import pandas as pd
 
-from agrifield.config.settings import AgrifieldSettings
-from agrifield.geo.transforms import transform_points
+from demetra.config.settings import demetraSettings
+from demetra.geo.transforms import transform_points
 
 logger = logging.getLogger(__name__)
 
@@ -28,14 +28,14 @@ NITROGEN_RATE_COLUMNS: list[str] = [
 
 def load_nitrogen_shapefile(
     shp_path: str,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame | None:
     """Load a single nitrogen application shapefile.
 
     Returns a DataFrame with columns ``x``, ``y``, ``nitrogen_lb_ac``,
     or ``None`` if no recognised rate column is found.
     """
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
 
     gdf = gpd.read_file(shp_path)
     logger.info("Nitrogen shapefile columns for %s: %s", shp_path, list(gdf.columns))
@@ -65,14 +65,14 @@ def load_nitrogen_shapefile(
 
 def combine_multiple_n_files(
     shp_list: list[str],
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame | None:
     """Load and combine multiple nitrogen shapefiles.
 
     Where multiple passes overlap at the same rounded location the rates are
     summed.
     """
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
 
     dfs: list[pd.DataFrame] = []
     for path in shp_list:

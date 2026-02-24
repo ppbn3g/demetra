@@ -1,4 +1,4 @@
-"""Click CLI entry points for agrifield."""
+"""Click CLI entry points for demetra."""
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ def _configure_logging(verbose: bool) -> None:
 @click.group()
 @click.option("-v", "--verbose", is_flag=True, help="Enable debug logging.")
 def main(verbose: bool) -> None:
-    """AgriField — agricultural field data analytics CLI."""
+    """Demetra — agricultural field data analytics CLI."""
     _configure_logging(verbose)
 
 
@@ -36,14 +36,14 @@ def main(verbose: bool) -> None:
 @click.option("-o", "--output", type=click.Path(), default=None, help="Override output CSV path.")
 def prepare(config_yaml: str, output: str | None) -> None:
     """Run the data preparation pipeline for a field config."""
-    from agrifield.config.field_config import FieldConfig
-    from agrifield.config.settings import AgrifieldSettings
-    from agrifield.pipeline import build_field_dataset
+    from demetra.config.field_config import FieldConfig
+    from demetra.config.settings import demetraSettings
+    from demetra.pipeline import build_field_dataset
 
     config = FieldConfig.from_yaml(config_yaml)
     if output is not None:
         config.output_dir = Path(output).parent
-    settings = AgrifieldSettings()
+    settings = demetraSettings()
 
     df = build_field_dataset(config, settings)
     click.echo(f"Done. {len(df)} acres written to {config.output_dir / 'acre_dataset.csv'}")
@@ -59,8 +59,8 @@ def prepare(config_yaml: str, output: str | None) -> None:
 @click.option("-o", "--output-dir", type=click.Path(), default=None, help="Directory for output.")
 def model(dataset_csv: str, coords: bool, output_dir: str | None) -> None:
     """Run model comparison on a prepared dataset."""
-    from agrifield.modeling.comparison import run_model_comparison
-    from agrifield.modeling.data import load_dataset
+    from demetra.modeling.comparison import run_model_comparison
+    from demetra.modeling.data import load_dataset
 
     df = load_dataset(dataset_csv)
     results_df, _fitted = run_model_comparison(df, use_coords=coords)
@@ -83,7 +83,7 @@ def model(dataset_csv: str, coords: bool, output_dir: str | None) -> None:
 @click.argument("dataset_csv", type=click.Path(exists=True))
 def inspect(dataset_csv: str) -> None:
     """Print predictor summaries for a dataset."""
-    from agrifield.modeling.data import inspect_predictors, load_dataset
+    from demetra.modeling.data import inspect_predictors, load_dataset
 
     df = load_dataset(dataset_csv)
     stats = inspect_predictors(df)
@@ -108,31 +108,31 @@ def plot(dataset_csv: str, plot_type: str, save: str | None) -> None:
     """Generate plots from a prepared dataset."""
     import matplotlib.pyplot as plt
 
-    from agrifield.modeling.data import load_dataset
+    from demetra.modeling.data import load_dataset
 
     df = load_dataset(dataset_csv)
     save_path = Path(save) if save else None
 
     if plot_type == "satellite":
-        from agrifield.viz.geo_plots import plot_yield_satellite
+        from demetra.viz.geo_plots import plot_yield_satellite
 
         fig = plot_yield_satellite(df, save_path=save_path)
 
     elif plot_type == "grid":
-        from agrifield.viz.geo_plots import plot_yield_grid
+        from demetra.viz.geo_plots import plot_yield_grid
 
         fig = plot_yield_grid(df, save_path=save_path)
 
     elif plot_type == "soil":
-        from agrifield.viz.model_plots import plot_yield_by_soil
+        from demetra.viz.model_plots import plot_yield_by_soil
 
         fig = plot_yield_by_soil(df, save_path=save_path)
 
     elif plot_type == "nitrogen":
         import numpy as np
 
-        from agrifield.modeling.nitrogen import compute_optimal_n_rate, fit_quadratic_nitrogen
-        from agrifield.viz.model_plots import plot_nitrogen_response
+        from demetra.modeling.nitrogen import compute_optimal_n_rate, fit_quadratic_nitrogen
+        from demetra.viz.model_plots import plot_nitrogen_response
 
         result = fit_quadratic_nitrogen(df)
         if result is None:

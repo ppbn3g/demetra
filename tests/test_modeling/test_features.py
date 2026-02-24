@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from agrifield.modeling.features import build_feature_matrix
+from demetra.modeling.features import build_feature_matrix
 
 
 def test_feature_matrix_shape(sample_acre_df: pd.DataFrame) -> None:

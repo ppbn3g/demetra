@@ -9,8 +9,8 @@ import numpy as np
 import pandas as pd
 import requests
 
-from agrifield.config.settings import AgrifieldSettings
-from agrifield.geo.transforms import get_field_centroid_latlon
+from demetra.config.settings import demetraSettings
+from demetra.geo.transforms import get_field_centroid_latlon
 
 logger = logging.getLogger(__name__)
 
@@ -49,10 +49,10 @@ def fetch_rainfall(
     lon: float,
     start: str,
     end: str,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> float:
     """Fetch total growing-season rainfall (inches) from Open-Meteo ERA5."""
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
 
     params = {
         "latitude": lat,
@@ -99,10 +99,10 @@ def add_rainfall_to_grid(
     shp_path: str,
     start: str,
     end: str,
-    settings: AgrifieldSettings | None = None,
+    settings: demetraSettings | None = None,
 ) -> pd.DataFrame:
     """Add a single rainfall value to all rows based on field centroid."""
-    settings = settings or AgrifieldSettings()
+    settings = settings or demetraSettings()
 
     lat, lon = get_field_centroid_latlon(shp_path, settings)
     total_rain_in = fetch_rainfall(lat, lon, start, end, settings)

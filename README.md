@@ -1,4 +1,4 @@
-# AgriField
+# Demetra
 
 Acre-level crop yield prediction using machine learning. Integrates John Deere yield
 monitor data, nitrogen application records, Open-Meteo weather data, and USDA SSURGO
@@ -31,19 +31,19 @@ growing_season_end: "2025-10-01"
 3. Run the data preparation pipeline:
 
 ```bash
-agrifield prepare configs/bob_mueller_2025.yaml
+demetra prepare configs/bob_mueller_2025.yaml
 ```
 
 4. Run model comparison:
 
 ```bash
-agrifield model data/processed/bob_mueller_2025/acre_dataset.csv
+demetra model data/processed/bob_mueller_2025/acre_dataset.csv
 ```
 
 5. Generate plots:
 
 ```bash
-agrifield plot data/processed/bob_mueller_2025/acre_dataset.csv --type satellite
+demetra plot data/processed/bob_mueller_2025/acre_dataset.csv --type satellite
 ```
 
 ## Development

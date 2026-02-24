@@ -12,8 +12,8 @@ from sklearn.ensemble import (
 )
 from sklearn.linear_model import ElasticNet, Lasso, LinearRegression, Ridge
 
-from agrifield.modeling.evaluation import fit_and_evaluate
-from agrifield.modeling.features import build_feature_matrix, build_quadratic_n_soil_matrix
+from demetra.modeling.evaluation import fit_and_evaluate
+from demetra.modeling.features import build_feature_matrix, build_quadratic_n_soil_matrix
 
 logger = logging.getLogger(__name__)
 

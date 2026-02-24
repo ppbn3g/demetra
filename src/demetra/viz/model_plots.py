@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.figure import Figure
 
-from agrifield.modeling.features import build_feature_matrix
+from demetra.modeling.features import build_feature_matrix
 
 logger = logging.getLogger(__name__)
 
