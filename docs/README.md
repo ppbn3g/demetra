@@ -107,3 +107,37 @@ demetra plot data/processed/bob_mueller_2025/acre_dataset.csv --type satellite
 pip install -e ".[dev]"
 pytest tests/
 ```
+
+## 6-Month Roadmap
+
+Demetra is evolving into a commercial-grade agricultural intelligence platform integrating
+drone imagery, probabilistic weather modeling, and acre-level risk analytics.
+
+**Phase 1 — Data Infrastructure**
+- Standardize historical drone imagery
+- Build acre-to-imagery alignment engine
+
+**Phase 2 — Baseline Imagery Modeling**
+- Integrate NDVI and texture features
+- Quantify performance lift vs. tabular-only models
+
+**Phase 3 — Deep Learning**
+- Train patch-based CNN/ViT models
+- Implement spatially robust validation
+
+**Phase 4 — Probabilistic Weather & Risk**
+- Replace deterministic weather with distribution-based features
+- Generate yield quantiles and downside risk maps
+
+**Phase 5 — Application Backend**
+- Deploy FastAPI service layer
+- Standardize result artifacts and job management
+
+**Phase 6 — AI Insights & UI**
+- Generate grounded AI summaries from computed metrics
+- Release simplified frontend with guided workflow
+
+**Goal:** Deliver a deployable, acre-level yield and risk intelligence system with
+vision + weather uncertainty + commercial usability.
+
+See [ROADMAP.md](ROADMAP.md) for the full detailed roadmap.
